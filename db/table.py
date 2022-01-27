@@ -1,6 +1,10 @@
 import sqlalchemy
 from sqlalchemy import ForeignKey
+
+
 metadata = sqlalchemy.MetaData()
+
+
 
 users = sqlalchemy.Table(
     "users",

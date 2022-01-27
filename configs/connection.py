@@ -1,55 +1,38 @@
 import databases
 import sqlalchemy
 from functools import lru_cache
+from configs import dbinfo
 from db.table import metadata
+from pydantic import BaseSettings
+
+class Setting(BaseSettings):
+    db_connection: str
+    db_host: str
+    db_port: str
+    db_database: str
+    db_username: str
+    db_password: str
 
 
-""" import os
-import re
-
-uri = os.getenv("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")  # or other relevant config var
-if uri.startswith("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78"):
-    uri = uri.replace("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", "postgresql://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", 1)
-# rest of connection code using the connection string `uri` """
-
-
-
-""" @lru_cache()
+@lru_cache()
 def db_config():
     return dbinfo.Setting()
 
 def DATABASE_URL(
-    connection: str = "postgres",
-    username: str   = "lrcbqxortfgumm",
-    password: str   = "4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6",
-    host: str       = "ec2-34-233-157-189.compute-1.amazonaws.com",
+    connection: str = "postgresql",
+    username: str   = "pacis",
+    password: str   = "123",
+    host: str       = "127.0.0.1",
     port: str       = "5432",
-    database: str   = "d655pfbfgl0o78"
+    database: str   = "Home_economy"
 ):
-    return str("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")
-"""
+    return str(connection+"://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")
 
 
-import os
-import re
-
-uri = os.getenv("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")  # or other relevant config var
-
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", "postgresql://postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", 1)
-
-
-
-
-uri="postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78"
-database = databases.Database(uri)
+database = databases.Database(DATABASE_URL())
 
 engine = sqlalchemy.create_engine(
-    uri
-) 
-
-
-
-
+    DATABASE_URL()
+)
 
 metadata.create_all(engine)
