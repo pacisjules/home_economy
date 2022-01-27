@@ -19,13 +19,13 @@ async def home():
 
 
 @app.get("/app/info", tags=["App"])
-async def app_info(setting: appinfo.Setting = Depends(app_setting)):
+async def app_info():
     return {
-        "app_name"      : setting.app_name,
-        "app_version"   : setting.app_version,
-        "app_framework" : setting.app_framework,
-        "app_date"      : setting.app_date,
-        "Owner"         : setting.owner
+        "app_name"      : "Home Economy App",
+        "app_version"   : "1.0",
+        "app_framework" : "FastAPI",
+        "app_date"      : "2021-01-01 20:48:10",
+        "Owner"         : "Pacis Jules ISHIMWE"
     }
 
 @app.middleware("http")

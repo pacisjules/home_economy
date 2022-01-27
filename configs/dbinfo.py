@@ -7,6 +7,3 @@ class Setting(BaseSettings):
     db_database: str
     db_username: str
     db_password: str
-
-    class Config:
-        env_file = "data.txt"
