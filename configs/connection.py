@@ -28,11 +28,24 @@ def DATABASE_URL(
 ):
     return str("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")
 """
-database_Url="postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78"
-database = databases.Database(database_Url)
+
+
+import os
+import re
+
+uri = os.getenv("postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78")  # or other relevant config var
+
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", "postgresql://postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78", 1)
+
+
+
+
+uri="postgres://lrcbqxortfgumm:4ef5aae613c7e2caaf6bc39ae950e9d670e401a4d6af5a866c5fa5ee5abaf7f6@ec2-34-233-157-189.compute-1.amazonaws.com:5432/d655pfbfgl0o78"
+database = databases.Database(uri)
 
 engine = sqlalchemy.create_engine(
-    database_Url
+    uri
 ) 
 
 
