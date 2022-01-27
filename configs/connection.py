@@ -1,7 +1,6 @@
 import databases
 import sqlalchemy
 from functools import lru_cache
-from configs import dbinfo
 from db.table import metadata
 
 
