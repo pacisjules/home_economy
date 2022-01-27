@@ -18,6 +18,12 @@ async def home():
     }
 
 
+@app.get("/check/{item}", tags=["Home"])
+async def home(item: str):
+    return {
+        "Check Item" : item
+    }
+
 @app.get("/app/info", tags=["App"])
 async def app_info():
     return {
