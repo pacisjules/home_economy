@@ -9,4 +9,4 @@ class Setting(BaseSettings):
     db_password: str
 
     class Config:
-        env_file = ".env"
+        env_file = "data.txt"
