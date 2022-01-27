@@ -6,6 +6,3 @@ class Setting(BaseSettings):
     app_framework: str
     app_date: str
     owner: str
-
-    class Config:
-        env_file = ".env"
